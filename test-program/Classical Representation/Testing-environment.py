@@ -6,7 +6,7 @@ close_val = data['Close/Last'].tolist()
 close_val = [price.replace('$', '') for price in close_val]
 close_val = [float(price) for price in close_val]
 
-aapl = Classes.Company("apple")
+aapl = Classes.Stock("apple")
 aapl.build_total_list(close_val)
 aapl.return_info()
 print()
@@ -17,7 +17,7 @@ bot1.return_info()
 print()
 
 
-c1 = Classes.Company("company1")
+c1 = Classes.Stock("company1")
 c1.build_total_list(list(range(50, 100)))
 c1.return_info()
 print()

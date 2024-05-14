@@ -1,4 +1,4 @@
-class Company:
+class Stock:
     def __init__(self, name):
         self.name = name
         self.price = 0
@@ -29,15 +29,16 @@ class Company:
         self.days = 0
         self.close_prices = []
 
-def simple_moving_avg(days: int, stock: Company) -> float:
+def simple_moving_avg(days: int, stock: Stock) -> float:
     return sum(stock.close_prices[days:]) / days
 
 class Bot:
-    def __init__(self, buying_power: float, strategy, stock: Company):
+    def __init__(self, buying_power: float, strategy, stock: Stock):
         self.buying_power = buying_power
         self.strategy = strategy
         self.trades = []
         self.stock = stock
+        self.profit_or_loss = 0
 
     def run(self):
         self.buying_power += self.strategy(self.stock)
@@ -48,11 +49,11 @@ class Bot:
         print("buying power:", self.buying_power)
         print("stock:", self.stock.name)
 
-def simple_strategy(stock: Company) -> float:
+def simple_strategy(stock: Stock) -> float:
     sma = simple_moving_avg(15, stock)
     money_spent = 0
     if sma >= stock.close_prices[-1]:
-        money_spent -= stock.close_prices[-1]
+        money_spent -= 50
     else:
         money_spent += stock.close_prices[-1] * 0.5
     return money_spent
